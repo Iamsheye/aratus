@@ -271,7 +271,12 @@ const TokenTable = () => {
     handleViewChange(newView.id.toString());
   };
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading)
+    return (
+      <div className="flex justify-center w-screen">
+        <div className="border-2 border-t-gray-800 border-transparent w-10 h-10 rounded-full animate-spin duration-300"></div>
+      </div>
+    );
 
   return (
     <div>
