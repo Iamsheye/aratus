@@ -33,6 +33,7 @@ import { Button } from "@/components/ui/button";
 import DraggableHeader from "./draggable-header";
 import CustomizeViewModal, { savedViewsAtom } from "./customize-modal";
 import { Settings } from "lucide-react";
+import { FaCaretDown, FaCaretUp } from "react-icons/fa";
 import { SavedView, Token } from "@/types";
 
 const ResponsiveLine = dynamic(
@@ -116,11 +117,16 @@ const TokenTable = () => {
       accessorFn: (row) => row.price_change_percentage_1h_in_currency,
       cell: ({ row }) => (
         <span
-          className={`font-medium text-sm ${
+          className={`font-medium flex items-center text-sm ${
             row.original.price_change_percentage_1h_in_currency > 0
               ? "text-green-500"
               : "text-red-500"
           }`}>
+          {row.original.price_change_percentage_1h_in_currency > 0 ? (
+            <FaCaretUp />
+          ) : (
+            <FaCaretDown />
+          )}
           {Math.abs(
             parseFloat(
               row.original.price_change_percentage_1h_in_currency?.toFixed(2)
@@ -136,11 +142,16 @@ const TokenTable = () => {
       accessorFn: (row) => row.price_change_percentage_24h_in_currency,
       cell: ({ row }) => (
         <span
-          className={`font-medium text-sm ${
+          className={`font-medium flex items-center text-sm ${
             row.original.price_change_percentage_24h_in_currency > 0
               ? "text-green-500"
               : "text-red-500"
           }`}>
+          {row.original.price_change_percentage_24h_in_currency > 0 ? (
+            <FaCaretUp />
+          ) : (
+            <FaCaretDown />
+          )}
           {Math.abs(
             parseFloat(
               row.original.price_change_percentage_24h_in_currency?.toFixed(2)
@@ -156,11 +167,16 @@ const TokenTable = () => {
       accessorFn: (row) => row.price_change_percentage_7d_in_currency,
       cell: ({ row }) => (
         <span
-          className={`font-medium text-sm ${
+          className={`font-medium flex items-center text-sm ${
             row.original.price_change_percentage_7d_in_currency > 0
               ? "text-green-500"
               : "text-red-500"
           }`}>
+          {row.original.price_change_percentage_7d_in_currency > 0 ? (
+            <FaCaretUp />
+          ) : (
+            <FaCaretDown />
+          )}
           {Math.abs(
             parseFloat(
               row.original.price_change_percentage_7d_in_currency?.toFixed(2)
