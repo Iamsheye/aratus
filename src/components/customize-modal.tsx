@@ -1,6 +1,5 @@
 import React, { SetStateAction, useState } from "react";
-import { useAtom } from "jotai";
-import { atom } from "jotai";
+import { useAtom, atom } from "jotai";
 import {
   Dialog,
   DialogContent,
@@ -12,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
+import { SavedView } from "@/types";
 
 type CustomizeViewModalProps = {
   isOpen: boolean;
@@ -50,7 +50,8 @@ const CustomizeViewModal = ({
 }: CustomizeViewModalProps) => {
   const [selectedColumns, setSelectedColumns] = useState(currentColumns);
   const [viewName, setViewName] = useState("");
-  const [savedViews, setSavedViews] = useAtom(savedViewsAtom);
+
+  const [savedViews, setSavedViews] = useAtom<SavedView[]>(savedViewsAtom);
 
   const handleToggleColumn = (columnId: string) => {
     setSelectedColumns((prev) => {
