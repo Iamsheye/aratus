@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { SetStateAction, useState } from "react";
 import { useAtom } from "jotai";
 import { atom } from "jotai";
 import {
@@ -17,6 +17,7 @@ type CustomizeViewModalProps = {
   isOpen: boolean;
   onClose: () => void;
   currentColumns: string[];
+  setColumnOrder: (value: SetStateAction<string[]>) => void;
   onSave: (view: { id: number; name: string; columns: string[] }) => void;
 };
 
@@ -45,6 +46,7 @@ const CustomizeViewModal = ({
   onClose,
   currentColumns,
   onSave,
+  setColumnOrder,
 }: CustomizeViewModalProps) => {
   const [selectedColumns, setSelectedColumns] = useState(currentColumns);
   const [viewName, setViewName] = useState("");
@@ -72,14 +74,16 @@ const CustomizeViewModal = ({
       columns: selectedColumns,
     };
 
-    debugger;
-
     const updatedViews = [...savedViews, newView];
     setSavedViews(updatedViews);
+    setColumnOrder(selectedColumns);
     localStorage.setItem("tokenTableViews", JSON.stringify(updatedViews));
 
     onSave(newView);
     onClose();
+
+    setSelectedColumns(currentColumns);
+    setViewName("");
   };
 
   return (

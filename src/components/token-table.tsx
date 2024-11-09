@@ -297,15 +297,30 @@ const TokenTable = () => {
   return (
     <div>
       <div className="w-10/12 mx-auto">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between py-3">
           <Tabs
             value={activeView}
             onValueChange={handleViewChange}
             className="grow">
             <TabsList className="bg-transparent w-full justify-start">
-              <TabsTrigger value="trending">Trending</TabsTrigger>
+              <TabsTrigger
+                value="trending"
+                className={`!shadow-none ${
+                  "trending" === activeView
+                    ? "!text-[#35af00] font-semibold !bg-[#e8fcc9]"
+                    : ""
+                }`}>
+                Trending
+              </TabsTrigger>
               {savedViews.map((view) => (
-                <TabsTrigger key={view.id} value={view.id.toString()}>
+                <TabsTrigger
+                  key={view.id}
+                  value={view.id.toString()}
+                  className={`!shadow-none ${
+                    view.id.toString() === activeView
+                      ? "!text-[#35af00] font-semibold !bg-[#e8fcc9]"
+                      : ""
+                  }`}>
                   {view.name}
                 </TabsTrigger>
               ))}
@@ -371,6 +386,7 @@ const TokenTable = () => {
 
       <CustomizeViewModal
         isOpen={isCustomizeOpen}
+        setColumnOrder={setColumnOrder}
         onClose={() => setIsCustomizeOpen(false)}
         currentColumns={columnOrder}
         onSave={handleSaveView}
